@@ -7,6 +7,8 @@ import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 import { Coffee } from './entities/coffee.entity';
 import { Flavor } from './entities/flavor.entity';
 
+const DEFAULT_LIMIT = 10;
+
 @Injectable()
 export class CoffeesService {
   constructor(
@@ -17,7 +19,7 @@ export class CoffeesService {
   ) {}
 
   findAll(paginationQuery: PaginationQueryDto) {
-    const { offset, limit } = paginationQuery;
+    const { offset, limit = DEFAULT_LIMIT } = paginationQuery;
     return this.coffeeRepository.find({
       order: { id: 'ASC' },
       relations: { flavors: true },
