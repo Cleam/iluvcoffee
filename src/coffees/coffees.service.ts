@@ -13,7 +13,7 @@ export class CoffeesService {
   ) {}
 
   findAll() {
-    return this.coffeeRepository.find();
+    return this.coffeeRepository.find({ order: { id: 'ASC' } });
   }
 
   async findOne(id: string) {
