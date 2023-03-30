@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { WrapResponseInterceptor } from './common/interceptors/wrap-response.interceptor';
+import { TimeoutInterceptor } from './common/interceptors/timeout.interceptor';
 // import { ApiKeyGuard } from './common/guards/api-key.guard';
 
 async function bootstrap() {
@@ -23,7 +24,10 @@ async function bootstrap() {
   // 全局守卫
   // app.useGlobalGuards(new ApiKeyGuard());
   // 全局拦截器
-  app.useGlobalInterceptors(new WrapResponseInterceptor());
+  app.useGlobalInterceptors(
+    new WrapResponseInterceptor(),
+    new TimeoutInterceptor(),
+  );
   await app.listen(3000);
 }
 bootstrap();
