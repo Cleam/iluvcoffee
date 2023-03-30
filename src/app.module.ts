@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 // import { Coffee } from './coffees/entities/coffee.entity';
 // import { Flavor } from './coffees/entities/flavor.entity';
 import { ConfigModule } from '@nestjs/config';
+import { CommonModule } from './common/common.module';
 import appConfig from './config/app.config';
 // import Joi from 'joi';
 
@@ -27,6 +28,7 @@ import appConfig from './config/app.config';
     }),
     ConfigModule.forRoot({ load: [appConfig] }),
     CoffeesModule,
+    CommonModule,
   ],
   controllers: [AppController],
   providers: [AppService],
