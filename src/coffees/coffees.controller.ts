@@ -8,6 +8,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { ParseIntPipe } from 'src/common/pips/parse-int.pipe';
 import { Public } from '../common/decorators/public.decorator';
 import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 import { CoffeesService } from './coffees.service';
@@ -27,7 +28,7 @@ export class CoffeesController {
 
   @Public()
   @Get(':id')
-  get(@Param('id') id: number) {
+  get(@Param('id', ParseIntPipe) id: number) {
     return this.coffeeService.findOne(id);
   }
 
