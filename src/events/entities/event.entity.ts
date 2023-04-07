@@ -7,7 +7,7 @@ export class Event extends Document {
   @Prop()
   type: string;
 
-  @Prop()
+  @Prop({ index: true }) // 指定索引，加速查询
   name: string;
 
   @Prop(mongoose.Schema.Types.Mixed)
@@ -15,3 +15,6 @@ export class Event extends Document {
 }
 
 export const EventSchema = SchemaFactory.createForClass(Event);
+
+// 联合索引（1: ASC 升序, -1: DESC 降序）
+EventSchema.index({ name: 1, type: -1 });
